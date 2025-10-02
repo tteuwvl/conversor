@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Conversor PDF ↔ Word</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/icon.png') }}" type="image/png">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo">
+    <h1>Conversor de Documentos</h1>
+    <button id="toggleTheme">
+      <img id="themeIcon" class="icon theme-switch" alt="Tema"
+           src="{{ url_for('static', filename='img/claro.png') }}"
+           data-light="{{ url_for('static', filename='img/claro.png') }}"
+           data-dark="{{ url_for('static', filename='img/escuro.png') }}">
+    </button>
+  </header>
+
+  <main>
+    <p class="sub">PDF ↔ Word com rapidez e simplicidade</p>
+
+    <div class="card-container">
+      <!-- PDF para Word -->
+      <div class="card">
+        <h2>PDF para Word</h2>
+        <form id="pdfForm">
+          <label class="file-label">
+            <img class="icon theme-switch" alt="Upload"
+                 src="{{ url_for('static', filename='img/selecionar.png') }}"
+                 data-light="{{ url_for('static', filename='img/selecionar.png') }}"
+                 data-dark="{{ url_for('static', filename='img/selecionar-d.png') }}">
+            Escolher PDF
+            <input type="file" name="file" accept=".pdf" required onchange="showFileName(this, 'pdfName')">
+          </label>
+          <button type="submit" class="convert-btn">
+            <img class="icon theme-switch" alt="Converter"
+                 src="{{ url_for('static', filename='img/converter.png') }}"
+                 data-light="{{ url_for('static', filename='img/converter.png') }}"
+                 data-dark="{{ url_for('static', filename='img/converter-d.png') }}">
+            Converter
+          </button>
+          <div class="progress" id="pdfProgress"></div>
+        </form>
+        <p id="pdfStatus" class="status-message"></p>
+        <a id="pdfDownload" class="download-btn" style="display:none;" target="_blank">
+          <img class="icon theme-switch" alt="Download"
+               src="{{ url_for('static', filename='img/baixar.png') }}"
+               data-light="{{ url_for('static', filename='img/baixar.png') }}"
+               data-dark="{{ url_for('static', filename='img/baixar-d.png') }}">
+          Baixar arquivo
+        </a>
+        <div class="preview"></div>
+        <p id="pdfName" class="file-name"></p>
+      </div>
+
+      <!-- Word para PDF -->
+      <div class="card">
+        <h2>Word para PDF</h2>
+        <form id="wordForm">
+          <label class="file-label">
+            <img class="icon theme-switch" alt="Upload"
+                src="{{ url_for('static', filename='img/selecionar.png') }}"
+                 data-light="{{ url_for('static', filename='img/selecionar.png') }}"
+                 data-dark="{{ url_for('static', filename='img/selecionar-d.png') }}">
+            Escolher Word
+            <input type="file" name="file" accept=".docx" required onchange="showFileName(this, 'wordName')">
+          </label>
+          <button type="submit" class="convert-btn">
+            <img class="icon theme-switch" alt="Converter"
+                src="{{ url_for('static', filename='img/converter.png') }}"
+                 data-light="{{ url_for('static', filename='img/converter.png') }}"
+                 data-dark="{{ url_for('static', filename='img/converter-d.png') }}">
+            Converter
+          </button>
+          <div class="progress" id="wordProgress"></div>
+        </form>
+        <p id="wordStatus" class="status-message"></p>
+        <a id="wordDownload" class="download-btn" style="display:none;" target="_blank">
+          <img class="icon theme-switch" alt="Download"
+               src="{{ url_for('static', filename='img/baixar.png') }}"
+               data-light="{{ url_for('static', filename='img/baixar.png') }}"
+               data-dark="{{ url_for('static', filename='img/baixar-d.png') }}">
+          Baixar arquivo
+        </a>
+        <div class="preview"></div>
+        <p id="wordName" class="file-name"></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Feito com 💙 por Trocadoc • © 2025</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
